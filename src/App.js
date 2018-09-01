@@ -20,11 +20,11 @@ class App extends Component {
     };
   }
 
-  // addToDatabase = (userName, userKeyword) => {
-  addToDatabase = (userName, userCaption, captionAuthor) => {
+  addToDatabase = (userImage, userName, userCaption, captionAuthor) => {
     dbRef.push({
       // pushing keys INTO the firebase, in the instaPost object
       // name: userName,
+     
       name: userName,
       caption: userCaption,
       author: captionAuthor

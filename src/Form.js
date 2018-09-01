@@ -1,28 +1,83 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import Qs from 'qs';
+import firebase from './firebase';
+
+// Create a reference to firebase storage service (methods)
+const storage = firebase.storage();
+
+// Create a reference to actual instantiation of firebase storage service (root file location)
+// const storageRef = firebase.storage().ref();
+
 
 class Form extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         // Set state to keep track of changes (ie. what the user inputs) 
         this.state = {
+            userImage: '',
+            url: '',
+            progress: 0,
             userName: '',
             userKeyword: '',
         }
+
+        this.handleImageChange = this.handleImageChange.bind(this);
+
+        this.handleImageUpload = this.handleImageUpload.bind(this);
     }
 
-    handleChange = (e) => {
-        // console.log(e.target.value);
+    // Event Handler for userImage input
+     handleImageChange = (e) => {
+        // this.setState({  
+        //     [e.target.id]: e.target.files[0]
+        //     selectedFile: e.target.files[0]
+        // })
 
+        if(e.target.files[0]) {
+            const userImage = e.target.files[0];
+            this.setState(() => ({userImage}));
+        }
+    }
+
+    // Event Handler for userImage submit
+    handleImageUpload = (e) => {
+        // Preventing from refreshing 
+        e.preventDefault();
+
+        const {userImage} = this.state;
+
+        const uploadTask = storage.ref(`images/${userImage.name}`).put(userImage);
+
+        uploadTask.on('state_changed', (snapshot) => {
+            // Progress function
+            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+
+            this.setState({progress});
+
+            // Observe state change events such as progress, pause, and resume
+        }, (error) => {
+            // Handle unsuccessful uploads
+            console.log(error);
+        }, () => {
+            // Do something once upload is complete
+            
+            storage.ref('images').child(userImage.name).getDownloadURL().then(url => {
+               this.setState({url});
+            })
+        });
+    }
+
+    // Event Handler for userName and userKeyword input
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         }) 
     }
 
+    // Event Handler for submitting everything
     handleSubmit = (e) => {
-        // preventing page from refreshing 
+        // Prevent from refreshing 
         e.preventDefault();
 
         // API REQUEST: Get list of quotes, based on user's keyword input
@@ -42,13 +97,8 @@ class Form extends Component {
             // Create two variables to store the user's final results: a caption, and the author of caption
             const userCaption = randomQuote.body;
             const captionAuthor = randomQuote.author;
-
-            console.log(userCaption, captionAuthor);
-            // there might need to be a prop somewhere
             
             // PROPS
-            // this.props.addToDatabase(this.state.userName, this.state.userKeyword);
-
             this.props.addToDatabase(this.state.userName, userCaption, captionAuthor);
 
         })
@@ -57,6 +107,19 @@ class Form extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+
+                {/* Label + Input for Image Upload */}
+                <div id="fileSubmit">
+                    <label htmlFor="userImage">Upload Photo</label>
+
+                    <input onChange={this.handleImageChange} type="file" id="userImage" placeholder="Browse" accept="image/*" autoComplete="off"/>
+
+                    <button onClick={this.handleImageUpload} className="imageUpload">Upload Your Pic</button>
+
+                    <progress value={this.state.progress} max="100"/>
+
+                    <img src={this.state.url || 'https://via.placeholder.com/400x300'} alt="Uploaded image" height="300" width="400" />
+                </div>
 
                 {/* Label + Input for User Name */}
                 <label htmlFor="userName">Your Name</label>

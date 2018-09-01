@@ -7,13 +7,13 @@ class Caption extends Component {
                 {Object.keys(this.props.instaPost).map((key) => {
                     // map through each key inside instaPost object in App.js   
                     return(
-                    <div className="caption">
+                    <div className="caption" key={key}>
 
-                    <h4 key={key}>{this.props.instaPost[key].name}</h4>
+                    <h4>{this.props.instaPost[key].name}</h4>
 
-                    <p key={key}>{this.props.instaPost[key].caption}</p>
+                    <p>{this.props.instaPost[key].caption}</p>
 
-                    <p key={key}>{this.props.instaPost[key].author}</p>
+                    <p>{this.props.instaPost[key].author}</p>
 
                     </div>)
                 })}
