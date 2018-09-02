@@ -4,7 +4,7 @@ import firebase from './firebase';
 
 // MAIN COMPONENTS:
 import Form from './components/Form';
-import Caption from './components/Caption';
+import Gallery from './components/Gallery';
 
 // Icon Components:
 import Lightning from './styles/assets/Lightning';
@@ -16,23 +16,23 @@ import Star from './styles/assets/Star';
 
 //  Create a reference to the firebase database root and make it globally available:
 const dbRef = firebase.database().ref(); 
-
+const storage = firebase.storage();
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      instaPost: {} // Create a state object that holds: User's uploaded image, username input and user caption 
+      instaPost: {} // Create a state object that holds: User's username input and user caption 
     };
   }
 
-  addToDatabase = (userName, userCaption, captionAuthor) => {
+  addToDatabase = (userName, userCaption, captionAuthor, userImage) => {
     dbRef.push({
       // pushing keys INTO the firebase, in the instaPost object
-     
       name: userName,
       caption: userCaption,
-      author: captionAuthor
+      author: captionAuthor,
+      image: userImage
     });
   }
 
@@ -60,8 +60,9 @@ class App extends Component {
 
         <main className="wrapper">
           <div>
-            <Form addToDatabase={this.addToDatabase} />
-            <Caption instaPost={this.state.instaPost} />
+            <Form addToDatabase={this.addToDatabase} instaPost={this.state.instaPost} />
+
+            <Gallery instaPost={this.state.instaPost} imageResult={this.state.userImage} />
           </div>
         </main>
         

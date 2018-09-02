@@ -63,7 +63,8 @@ progress {
 }
 
 .imageInputs,
-.captionInputs {
+.captionInputs,
+.captionResult {
     width: 50%;
 }
 

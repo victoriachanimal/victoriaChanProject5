@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../firebase';
 
-// Create a reference to firebase storage service (methods)
+// // Create a reference to firebase storage service (methods)
 const storage = firebase.storage();
-
 
 class Form extends Component {
     constructor(props) {
@@ -16,20 +15,19 @@ class Form extends Component {
             url: '',
             progress: 0,
             userName: '',
+            userCaption: '',
+            captionAuthor: '',
             userKeyword: '',
+            showMe: true,
         }
 
         this.handleImageChange = this.handleImageChange.bind(this);
-
+        this.getCaption = this.getCaption.bind(this);
         this.handleImageUpload = this.handleImageUpload.bind(this);
     }
 
     // Event Handler for userImage input
      handleImageChange = (e) => {
-        // this.setState({  
-        //     [e.target.id]: e.target.files[0]
-        //     selectedFile: e.target.files[0]
-        // })
 
         if(e.target.files[0]) {
             const userImage = e.target.files[0];
@@ -61,6 +59,7 @@ class Form extends Component {
             
             storage.ref('images').child(userImage.name).getDownloadURL().then(url => {
                this.setState({url});
+               
             })
         });
     }
@@ -72,11 +71,35 @@ class Form extends Component {
         }) 
     }
 
-    // Event Handler for submitting everything
     handleSubmit = (e) => {
-        // Prevent from refreshing 
         e.preventDefault();
 
+        // api caption, username, and author are in form state. we are cool with all this data time to send it to firebase
+        this.props.addToDatabase(this.state.userName, 
+            this.state.userCaption, 
+            this.state.captionAuthor,
+            this.state.userImage
+        );
+
+
+        this.setState({ 
+            userImage: '',
+            url: '',
+            progress: 0,
+            userName: '',
+            userCaption: '',
+            captionAuthor: '',
+            userKeyword: '',
+            showMe: true,
+         })
+    }
+
+    
+
+    // Event Handler for getting a caption from api
+    getCaption = (e) => {
+
+        e.preventDefault();
         // API REQUEST: Get list of quotes, based on user's keyword input
         axios.get('https://favqs.com/api/quotes', {
             params: {
@@ -86,7 +109,6 @@ class Form extends Component {
                 'Authorization': `Token token="1c9b7094e9b6d9ca7f8246a9bf600802"`,
             }
         }).then(({ data }) => {
-            // console.log(data);
 
             // Select a random quote off a list of quotes relating to user's keyword
             const randomQuote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
@@ -94,10 +116,8 @@ class Form extends Component {
             // Create two variables to store the user's final results: a caption, and the author of caption
             const userCaption = randomQuote.body;
             const captionAuthor = randomQuote.author;
-            
-            // PROPS
-            this.props.addToDatabase(this.state.userName, userCaption, captionAuthor);
 
+            this.setState({ userCaption, captionAuthor, showMe: false });
         })
     }
 
@@ -121,6 +141,7 @@ class Form extends Component {
                         <img src={this.state.url || 'https://dummyimage.com/600x400/000000/ffffff.png'} alt="Uploaded image" height="300" width="400" />     
                     </div>
 
+                    {this.state.showMe?
                     <div className="captionInputs">
                         {/* Label + Input for User Name */}
                         <div className="nameInput">
@@ -133,8 +154,27 @@ class Form extends Component {
                             <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>
                             <input onChange={this.handleChange} type="text" id="userKeyword" placeholder="Type in keyword" value={this.state.userKeyword}/>
 
-                            <input id="submit" type="submit" value="Caption This" />
+                            <button onClick={this.getCaption}>
+                                Caption This
+                            </button>
                         </div>
+                    </div>
+                    :null
+                    }
+
+                    <div className="captionResult">
+                        { this.state.userCaption ?
+                            <div>
+                                <div className="caption">
+                                    <h4>{this.state.userName}</h4>
+                                    <p>{this.state.userCaption}</p>
+                                    <p>{this.state.captionAuthor}</p>
+                                </div>
+                                <button className="another" onClick={this.getCaption}>Another one, please</button>
+                                <input type="submit" onClick={this.handleSubmit} id="submit" className="save" value="Love it? Save it."/>
+                            </div>
+                        : null
+                        }
                     </div>
                 </div>
             </form>
