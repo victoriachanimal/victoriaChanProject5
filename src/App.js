@@ -26,19 +26,18 @@ class App extends Component {
     };
   }
 
-  addToDatabase = (userName, userCaption, captionAuthor, userImage) => {
+  addToDatabase = (userName, userCaption, captionAuthor, url) => {
     dbRef.push({
       // pushing keys INTO the firebase, in the instaPost object
       name: userName,
       caption: userCaption,
       author: captionAuthor,
-      image: userImage
+      image: url
     });
   }
 
   componentDidMount() {
     dbRef.on('value', (snapshot) => {
-
       this.setState({
         instaPost: snapshot.val(),
       })
@@ -62,7 +61,7 @@ class App extends Component {
           <div>
             <Form addToDatabase={this.addToDatabase} instaPost={this.state.instaPost} />
 
-            <Gallery instaPost={this.state.instaPost} imageResult={this.state.userImage} />
+            <Gallery instaPost={this.state.instaPost} imageResult={this.state.url} />
           </div>
         </main>
         

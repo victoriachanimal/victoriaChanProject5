@@ -7,11 +7,6 @@ const storage = firebase.storage();
 class Gallery extends Component {
     render() {
         return(
-            // <div className="imageResult">               
-            //     <div>
-            //         <img src={this.props.userImage} alt="" />
-            //     </div>
-            // </div>,
            
             <div className="finalResult">
                 {Object.keys(this.props.instaPost).map((key) => {
@@ -19,7 +14,7 @@ class Gallery extends Component {
                     return(
                     
                     <div className="finalCaption" key={key}>
-                    <img src={this.props.userImage} alt="" />
+                    <img src={this.props.instaPost[key].image} alt="" />
 
                     <h4>{this.props.instaPost[key].name}</h4>
 

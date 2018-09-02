@@ -30,8 +30,10 @@ class Form extends Component {
      handleImageChange = (e) => {
 
         if(e.target.files[0]) {
-            const userImage = e.target.files[0];
-            this.setState(() => ({userImage}));
+            // const userImage = e.target.files[0];
+            // this.setState(() => ({userImage}));
+            const url = e.target.files[0];
+            this.setState(() => ({ url }));
         }
     }
 
@@ -40,9 +42,9 @@ class Form extends Component {
         // Preventing from refreshing 
         e.preventDefault();
 
-        const {userImage} = this.state;
+        const {url} = this.state;
 
-        const uploadTask = storage.ref(`images/${userImage.name}`).put(userImage);
+        const uploadTask = storage.ref(`images/${url.name}`).put(url);
 
         uploadTask.on('state_changed', (snapshot) => {
             // Progress function
@@ -55,9 +57,9 @@ class Form extends Component {
             // Handle unsuccessful uploads
             console.log(error);
         }, () => {
-            // Do something once upload is complete
-            
-            storage.ref('images').child(userImage.name).getDownloadURL().then(url => {
+
+            // Do something once upload is complete   
+            storage.ref('images').child(url.name).getDownloadURL().then(url => {
                this.setState({url});
                
             })
@@ -78,7 +80,7 @@ class Form extends Component {
         this.props.addToDatabase(this.state.userName, 
             this.state.userCaption, 
             this.state.captionAuthor,
-            this.state.userImage
+            this.state.url
         );
 
 
@@ -94,7 +96,7 @@ class Form extends Component {
          })
     }
 
-    
+
 
     // Event Handler for getting a caption from api
     getCaption = (e) => {
