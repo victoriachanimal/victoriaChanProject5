@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import firebase from './firebase';
+import firebase from '../firebase';
 
 // Create a reference to firebase storage service (methods)
 const storage = firebase.storage();
-
-// Create a reference to actual instantiation of firebase storage service (root file location)
-// const storageRef = firebase.storage().ref();
 
 
 class Form extends Component {

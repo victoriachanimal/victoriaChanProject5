@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import firebase from './firebase';
-// import axios from 'axios';
-// import Qs from 'qs';
 
 // COMPONENTS
-import Form from './Form';
-import Caption from './Caption';
+import Form from './components/Form';
+import Caption from './components/Caption';
 
 //  Create a reference to the firebase database root and make it globally available:
 const dbRef = firebase.database().ref(); 
@@ -20,10 +18,9 @@ class App extends Component {
     };
   }
 
-  addToDatabase = (userImage, userName, userCaption, captionAuthor) => {
+  addToDatabase = (userName, userCaption, captionAuthor) => {
     dbRef.push({
       // pushing keys INTO the firebase, in the instaPost object
-      // name: userName,
      
       name: userName,
       caption: userCaption,
@@ -43,8 +40,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>My App</h1>
+        <header>
+          <h1>Test</h1>
         </header>
 
         <main>
