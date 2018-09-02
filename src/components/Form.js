@@ -106,27 +106,37 @@ class Form extends Component {
             <form onSubmit={this.handleSubmit}>
 
                 {/* Label + Input for Image Upload */}
-                <div id="fileSubmit">
-                    <label htmlFor="userImage">Upload Photo</label>
+                <div className="imageInputs">
+                    <label htmlFor="userImage" className="visuallyHidden">Upload Photo</label>
 
-                    <input onChange={this.handleImageChange} type="file" id="userImage" placeholder="Browse" accept="image/*" autoComplete="off"/>
+                    <input onChange={this.handleImageChange} type="file" id="userImage" placeholder="Browse" accept="image/*" autoComplete="off" />
 
                     <button onClick={this.handleImageUpload} className="imageUpload">Upload Your Pic</button>
 
-                    <progress value={this.state.progress} max="100"/>
-
-                    <img src={this.state.url || 'https://via.placeholder.com/400x300'} alt="Uploaded image" height="300" width="400" />
+                    <progress value={this.state.progress} max="100" />
                 </div>
 
-                {/* Label + Input for User Name */}
-                <label htmlFor="userName">Your Name</label>
-                <input onChange={this.handleChange} type="text" id="userName" placeholder="Your Name" value={this.state.userName}/>
+                <div className="postContainer">
+                    <div className="image">        
+                        <img src={this.state.url || 'https://dummyimage.com/600x400/000000/ffffff.png'} alt="Uploaded image" height="300" width="400" />     
+                    </div>
 
-                {/* Label + Input for User Artist Search */}
-                <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>
-                <input onChange={this.handleChange} type="text" id="userKeyword" placeholder="Type in keyword" value={this.state.userKeyword}/>
+                    <div className="captionInputs">
+                        {/* Label + Input for User Name */}
+                        <div className="nameInput">
+                            <label htmlFor="userName">Your Name</label>
+                            <input onChange={this.handleChange} type="text" id="userName" placeholder="Your Name" value={this.state.userName}/>
+                        </div>
 
-                <input type="submit" value="Give me a caption"/>
+                        {/* Label + Input for User Artist Search */}
+                        <div className="keywordInput">
+                            <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>
+                            <input onChange={this.handleChange} type="text" id="userKeyword" placeholder="Type in keyword" value={this.state.userKeyword}/>
+
+                            <input id="submit" type="submit" value="Caption This" />
+                        </div>
+                    </div>
+                </div>
             </form>
         )
     }
