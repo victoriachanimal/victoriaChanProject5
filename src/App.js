@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 import firebase from './firebase';
 
-// COMPONENTS
+// MAIN COMPONENTS:
 import Form from './components/Form';
 import Caption from './components/Caption';
+
+// Icon Components:
+import Lightning from './styles/assets/Lightning';
+import Eye from './styles/assets/Eye';
+import Ghost from './styles/assets/Ghost';
+import Heart from './styles/assets/Heart';
+import Mouth from './styles/assets/Mouth';
+import Star from './styles/assets/Star';
 
 //  Create a reference to the firebase database root and make it globally available:
 const dbRef = firebase.database().ref(); 
@@ -41,10 +49,16 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Test</h1>
+          <div className="headerLogo">
+            <Lightning />
+            <h1>Caption this</h1>
+            <Star />
+            <Eye />
+          </div>
+          <h2>your photo, their words</h2>
         </header>
 
-        <main>
+        <main className="wrapper">
           <div>
             <Form addToDatabase={this.addToDatabase} />
             <Caption instaPost={this.state.instaPost} />
