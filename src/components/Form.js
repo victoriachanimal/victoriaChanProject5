@@ -146,8 +146,8 @@ class Form extends Component {
                     {this.state.showMe?
                     <div className="captionInputs">
                         <div className="nameInput">
-                            <label htmlFor="userName">Your Name</label>
-                            <input onChange={this.handleChange} type="text" id="userName" placeholder="Your Name" value={this.state.userName}/>
+                            <label htmlFor="userName">Your name</label>
+                            <input onChange={this.handleChange} type="text" id="userName" placeholder="Your name" value={this.state.userName}/>
                         </div>
                         <div className="keywordInput">
                             <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>

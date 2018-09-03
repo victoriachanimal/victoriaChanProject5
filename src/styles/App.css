@@ -164,13 +164,15 @@ input#userKeyword {
     z-index: 100;
 }
 
-#finalSubmitBtn {
+#finalSubmitBtn,
+.imageUploadBtn {
     text-transform: uppercase;
     color: white;
     background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
     border: 1.5px solid black;
     letter-spacing: 1.3px;
     margin-top: 25px;
+    transition: all 0.3s ease;
 }
 
 /* Hover States */
@@ -180,9 +182,9 @@ button:hover {
     outline: none;
 }
 
-#finalSubmitBtn:hover {
-    background: #f09433;
-    transition: all 0.3s ease;
+#finalSubmitBtn:hover,
+.imageUploadBtn:hover {
+    background: #e6683c;
     outline: none;
 }
 
