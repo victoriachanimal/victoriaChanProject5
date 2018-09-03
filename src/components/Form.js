@@ -181,7 +181,7 @@ class Form extends Component {
                             <button className="anotherCaptionBtn" onClick={this.getCaption}>Another one, pls</button>
                             <input type="submit" onClick={this.handleSubmit} id="finalSubmitBtn" className="save" value="Love it? Save it." />
                         </div>
-                        <p className="warning">*By saving, your image and caption will be saved in the gallery below.</p>
+                        <p className="warning">*By saving, your image and caption will be posted in the gallery below.</p>
                     </div>
                     : null
                     }
