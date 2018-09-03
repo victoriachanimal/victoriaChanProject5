@@ -2,27 +2,25 @@ import React, { Component } from 'react';
 import './styles/App.css';
 import firebase from './firebase';
 
-// MAIN COMPONENTS:
+// Main Components:
 import Form from './components/Form';
 import Gallery from './components/Gallery';
 
 // Icon Components:
 import Lightning from './styles/assets/Lightning';
 import Eye from './styles/assets/Eye';
-import Ghost from './styles/assets/Ghost';
-import Heart from './styles/assets/Heart';
-import Mouth from './styles/assets/Mouth';
 import Star from './styles/assets/Star';
 
 //  Create a reference to the firebase database root and make it globally available:
 const dbRef = firebase.database().ref(); 
 const storage = firebase.storage();
 
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      instaPost: {} // Create a state object that holds: User's username input and user caption 
+      instaPost: {} // Create a state object that holds: User's username, caption, author, and uploaded image url
     };
   }
 
@@ -47,6 +45,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      
         <header>
           <div className="headerLogo">
             <Lightning />
@@ -61,10 +60,14 @@ class App extends Component {
           <div>
             <Form addToDatabase={this.addToDatabase} instaPost={this.state.instaPost} />
 
-            <Gallery instaPost={this.state.instaPost} imageResult={this.state.url} />
+            <h3>Gallery</h3>
+            <Gallery className="gallery" instaPost={this.state.instaPost} imageResult={this.state.url} />
           </div>
-        </main>
-        
+        </main>  
+
+        <footer>
+          <p className="copyright">&copy; Victoria Chan</p>
+        </footer>
       </div>
     );
   }

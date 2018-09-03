@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../firebase';
 
-// // Create a reference to firebase storage service (methods)
+
 const storage = firebase.storage();
 
 class Form extends Component {
@@ -26,20 +26,18 @@ class Form extends Component {
         this.handleImageUpload = this.handleImageUpload.bind(this);
     }
 
-    // Event Handler for userImage input
+    // Event handler for userImage input
      handleImageChange = (e) => {
 
         if(e.target.files[0]) {
-            // const userImage = e.target.files[0];
-            // this.setState(() => ({userImage}));
             const url = e.target.files[0];
             this.setState(() => ({ url }));
         }
     }
 
-    // Event Handler for userImage submit
+    // Event handler for userImage submit
     handleImageUpload = (e) => {
-        // Preventing from refreshing 
+
         e.preventDefault();
 
         const {url} = this.state;
@@ -47,6 +45,7 @@ class Form extends Component {
         const uploadTask = storage.ref(`images/${url.name}`).put(url);
 
         uploadTask.on('state_changed', (snapshot) => {
+
             // Progress function
             const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 
@@ -54,51 +53,26 @@ class Form extends Component {
 
             // Observe state change events such as progress, pause, and resume
         }, (error) => {
+
             // Handle unsuccessful uploads
             console.log(error);
         }, () => {
 
-            // Do something once upload is complete   
+            // Do something once upload is complete
             storage.ref('images').child(url.name).getDownloadURL().then(url => {
-               this.setState({url});
-               
+               this.setState({url});         
             })
         });
     }
 
-    // Event Handler for userName and userKeyword input
+    // Event handler for userName and userKeyword input
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         }) 
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-
-        // api caption, username, and author are in form state. we are cool with all this data time to send it to firebase
-        this.props.addToDatabase(this.state.userName, 
-            this.state.userCaption, 
-            this.state.captionAuthor,
-            this.state.url
-        );
-
-
-        this.setState({ 
-            userImage: '',
-            url: '',
-            progress: 0,
-            userName: '',
-            userCaption: '',
-            captionAuthor: '',
-            userKeyword: '',
-            showMe: true,
-         })
-    }
-
-
-
-    // Event Handler for getting a caption from api
+    // Event handler for getting a caption from Api
     getCaption = (e) => {
 
         e.preventDefault();
@@ -123,61 +97,94 @@ class Form extends Component {
         })
     }
 
+    // Event handler fo FINAL submit
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        // api caption, username, and author are in form state. we are cool with all this data time to send it to firebase
+        this.props.addToDatabase(this.state.userName,
+            this.state.userCaption,
+            this.state.captionAuthor,
+            this.state.url
+        );
+
+        this.setState({
+            userImage: '',
+            url: '',
+            progress: 0,
+            userName: '',
+            userCaption: '',
+            captionAuthor: '',
+            userKeyword: '',
+            showMe: true,
+        })
+    }
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
 
-                {/* Label + Input for Image Upload */}
+                {/* Label + input for image upload */}
                 <div className="imageInputs">
                     <label htmlFor="userImage" className="visuallyHidden">Upload Photo</label>
 
                     <input onChange={this.handleImageChange} type="file" id="userImage" placeholder="Browse" accept="image/*" autoComplete="off" />
 
-                    <button onClick={this.handleImageUpload} className="imageUpload">Upload Your Pic</button>
-
+                    <button onClick={this.handleImageUpload} className="imageUploadBtn">Upload Your Pic</button>
                     <progress value={this.state.progress} max="100" />
                 </div>
 
+                {/* Container for Insta post items */}
                 <div className="postContainer">
+
+                    {/* Image container*/}
                     <div className="image">        
-                        <img src={this.state.url || 'https://dummyimage.com/600x400/000000/ffffff.png'} alt="Uploaded image" height="300" width="400" />     
+                        <img className="cover" src={this.state.url} />  
                     </div>
 
+                    {/* Caption inputs container*/}
                     {this.state.showMe?
                     <div className="captionInputs">
-                        {/* Label + Input for User Name */}
                         <div className="nameInput">
                             <label htmlFor="userName">Your Name</label>
                             <input onChange={this.handleChange} type="text" id="userName" placeholder="Your Name" value={this.state.userName}/>
                         </div>
-
-                        {/* Label + Input for User Artist Search */}
                         <div className="keywordInput">
                             <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>
                             <input onChange={this.handleChange} type="text" id="userKeyword" placeholder="Type in keyword" value={this.state.userKeyword}/>
-
-                            <button onClick={this.getCaption}>
+                             <div className="captionBtnContainer">
+                                <button className="getCaptionBtn" onClick={this.getCaption}>
                                 Caption This
-                            </button>
+                                </button> 
+                            </div>    
                         </div>
                     </div>
                     :null
                     }
-
-                    <div className="captionResult">
-                        { this.state.userCaption ?
-                            <div>
-                                <div className="caption">
-                                    <h4>{this.state.userName}</h4>
-                                    <p>{this.state.userCaption}</p>
-                                    <p>{this.state.captionAuthor}</p>
-                                </div>
-                                <button className="another" onClick={this.getCaption}>Another one, please</button>
-                                <input type="submit" onClick={this.handleSubmit} id="submit" className="save" value="Love it? Save it."/>
+ 
+                    {/* Caption results container */}
+                    { this.state.userCaption ?
+                    <div className="captionResult wrapper">
+                        <div className="instaHeader">
+                            <div className="headerImage">
+                                <img className="cover" src={this.state.url} /> 
                             </div>
-                        : null
-                        }
+                            <h4>{this.state.userName}</h4>
+                        </div>
+                        <div className="captionContainer">
+                            <div className="caption">
+                                <p><span className="bold">{this.state.userName}</span>"{this.state.userCaption}"</p>
+                                <p className="author">-{this.state.captionAuthor}</p>
+                            </div>
+                        </div>
+                        <div className="saveResult">
+                            <button className="anotherCaptionBtn" onClick={this.getCaption}>Another one, pls</button>
+                            <input type="submit" onClick={this.handleSubmit} id="finalSubmitBtn" className="save" value="Love it? Save it." />
+                        </div>
+                        <p className="warning">*By saving, your image and caption will be saved in the gallery below.</p>
                     </div>
+                    : null
+                    }
                 </div>
             </form>
         )

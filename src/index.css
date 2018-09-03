@@ -1,3 +1,5 @@
+/* SETUP AND GENERAL STYLES */
+
 @import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Open+Sans:400,700');
 
 
@@ -19,6 +21,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
     width: 1px;
 }
 
+
 /* General styles */
 html {
   font-size: 62.5%;
@@ -27,8 +30,25 @@ html {
 
 .wrapper {
     max-width: 1280px;
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
+}
+
+button {
+    text-transform: uppercase;
+    color: white;
+    background: black;
+    letter-spacing: 1.3px;
+}
+
+img {
+    width: 100%;
+}
+
+.cover {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
 }
 
 /* Typography */
@@ -42,13 +62,28 @@ h1 {
     font-size: 6rem;
 }
 
-/* Icons */
-
-.icon {
-    width: 50px;
-    height: 50px;
+h3 {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 4.5rem;
+    text-align: center;
 }
 
-.cls-2 {
-    fill: white;
+p {
+    font-size: 1.2rem;
 }
+
+footer {
+    border-top: 1.5px solid black;
+    background: black;
+    padding-bottom: 1px;
+}
+
+.copyright {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2rem;
+    text-align: right;
+    padding: 0 25px;
+    color: white;
+}
+
+
