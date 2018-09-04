@@ -72,10 +72,13 @@ p {
     font-size: 1.2rem;
 }
 
+/* Footer Styles */
+
 footer {
     border-top: 1.5px solid black;
     background: black;
     padding-bottom: 1px;
+    position: relative;
 }
 
 .copyright {

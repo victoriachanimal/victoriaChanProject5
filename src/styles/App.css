@@ -105,6 +105,11 @@ progress {
     text-align: center;
 }
 
+#userImage {
+    text-align: center;
+    margin-left: 60px;
+}
+
 .captionInputs,
 .captionResult {
     width: 40%;
