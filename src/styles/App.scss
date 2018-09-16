@@ -1,7 +1,4 @@
-/* COMPONENT STYLES (see index.css for Setup and General styles) */
-
-/* SETUP AND GENERAL STYLES */
-
+// Google Fonts
 @import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Open+Sans:400,700');
 
 
@@ -22,7 +19,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
     position: absolute;
     width: 1px;
 }
-
 
 /* General styles */
 html {
@@ -78,9 +74,8 @@ footer {
 }
 
 .copyright {
-    font-family: 'Londrina Solid', cursive;
-    font-size: 2rem;
-    text-align: right;
+    font-size: 1.2rem;
+    text-align: center;
     padding: 0 25px;
     color: white;
 }
@@ -92,6 +87,15 @@ footer {
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+.headerLogo::after {
+    content: url(assets/arrow.svg);
+    display: inline-block;
+    transform: rotate(90deg);
+    position: absolute;
+    bottom: -65px;
+    z-index: 100;
 }
 
 .icon {
@@ -142,8 +146,8 @@ h2 {
 
 /* COMPONENT 1: Form Styles */
 form {
-    margin-top: 55px;
-    height: 95vh;
+    margin-top: 80px;
+    height: 110vh;
 }
 
 .imageInputs {
@@ -201,14 +205,24 @@ progress {
 }
 
 .captionInputs {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
     padding: 20px;
 }
 
-.captionInputs label {
+.steps {
     font-family: 'Londrina Solid', cursive;
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    font-size: 2rem;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-right: 4px;
+}
+
+label,
+.captionBtnContainer p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
 .nameInput,
@@ -232,25 +246,25 @@ input#userKeyword {
 
 .captionBtnContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-top: 10px;
 }
 
 .getCaptionBtn {
     background: black;
-    margin-top: 25px;
 }
 
 .captionBtnContainer::after {
     content: url(assets/mouth.svg);
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     position: absolute;
-    top: 30px;
-    right: -50px;
+    top: 50px;
+    right: -45px;
     z-index: 100;
 }
 
@@ -436,7 +450,7 @@ h3::after {
 @media (max-width: 780px) {
     /* Component 1: Form */
     form {
-        height: 130vh;
+        height: 150vh;
     }
 
     .image {
@@ -461,13 +475,6 @@ h3::after {
         display: none;
     }
 
-    .captionBtnContainer::after {
-        width: 50px;
-        height: 50px;
-        top: 0px;
-        right: -65px;
-    }
-
     .instaHeader {
         display: none;
     }
@@ -482,10 +489,9 @@ h3::after {
 
 /* Landscape phones and down  */
 @media (max-width: 550px) {
-
     /* Component 1: Form */
     form {
-        height: 110vh;
+        height: 130vh;
     }
 
     .postContainer {
@@ -505,13 +511,36 @@ h3::after {
 
 
 @media (max-width: 375px) {
+    // Header
+    .headerLogo::after {
+        display: none;
+    }
+
     .wrapper {
         width: 100%;
     }
 
     /* Component 1: Form */
+    form {
+        margin-top: 40px;
+        height: 135vh;
+    }
+
+    .postContainer::before {
+        content: url(assets/arrow.svg);
+        display: inline-block;
+        transform: rotate(90deg);
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+
     .postContainer {
         height: 35vh;
+        position: relative;
+        margin-top: 76px;
     }
 }
 /* end max-width 375px */

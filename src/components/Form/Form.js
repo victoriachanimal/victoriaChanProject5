@@ -93,7 +93,12 @@ class Form extends Component {
             const userCaption = randomQuote.body;
             const captionAuthor = randomQuote.author;
 
-            this.setState({ userCaption, captionAuthor, showMe: false });
+            if (userCaption === 'No quotes found') {
+                alert('No quotes found for this word. Please try another one!');
+            } else {
+                this.setState({ userCaption, captionAuthor, showMe: false });
+            }
+
         })
     }
 
@@ -101,8 +106,9 @@ class Form extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        // api caption, username, and author are in form state. we are cool with all this data time to send it to firebase
-        this.props.addToDatabase(this.state.userName,
+        // api caption, username, and author are in form state. we are cool with all this data, so time to send it to firebase
+        this.props.addToDatabase(
+            this.state.userName,
             this.state.userCaption,
             this.state.captionAuthor,
             this.state.url
@@ -126,36 +132,36 @@ class Form extends Component {
 
                 {/* Label + input for image upload */}
                 <div className="imageInputs">
-                    <label htmlFor="userImage" className="visuallyHidden">Upload Photo</label>
 
+                    <label htmlFor="userImage" ><span className="steps">Step 1. </span>Upload a pic</label>
+        
                     <input onChange={this.handleImageChange} type="file" id="userImage" placeholder="Browse" accept="image/*" autoComplete="off" />
 
-                    <button onClick={this.handleImageUpload} className="imageUploadBtn">Upload Your Pic</button>
+                    <button onClick={this.handleImageUpload} className="imageUploadBtn"> Upload Your Pic</button>
                     <progress value={this.state.progress} max="100" />
                 </div>
 
                 {/* Container for Insta post items */}
                 <div className="postContainer">
 
-                    {/* Image container*/}
+                    {/* Image container */}
                     <div className="image">        
                         <img className="cover" src={this.state.url} />  
                     </div>
 
-                    {/* Caption inputs container*/}
+                    {/* Caption inputs container */}
                     {this.state.showMe?
                     <div className="captionInputs">
                         <div className="nameInput">
-                            <label htmlFor="userName">Your name</label>
+                            <label htmlFor="userName"><span className="steps">Step 2.</span> Enter your name</label>
                             <input onChange={this.handleChange} type="text" id="userName" placeholder="Your name" value={this.state.userName}/>
                         </div>
                         <div className="keywordInput">
-                            <label htmlFor="userKeyword">Type in a word that reflects your current vibe</label>
+                            <label htmlFor="userKeyword"> <span className="steps">Step 3.</span> What's a word that reflects your current vibe?</label>
                             <input onChange={this.handleChange} type="text" id="userKeyword" placeholder="Type in keyword" value={this.state.userKeyword}/>
                              <div className="captionBtnContainer">
-                                <button className="getCaptionBtn" onClick={this.getCaption}>
-                                Caption This
-                                </button> 
+                                <p><span className="steps">Step 4.</span> Caption this</p> 
+                                <button className="getCaptionBtn" onClick={this.getCaption}>Caption This</button>      
                             </div>    
                         </div>
                     </div>

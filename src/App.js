@@ -53,7 +53,6 @@ class App extends Component {
             <Star />
             <Eye />
           </div>
-          <h2>your photo, their words</h2>
         </header>
 
         <main className="wrapper">
