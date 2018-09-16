@@ -25,11 +25,19 @@
     #finalSubmitBtn,
     input#userName,
     input#userKeyword {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     #finalSubmitBtn {
         margin-top: 15px;
+    }
+
+    .captionBtnContainer::after {
+        width: 30px;
+        height: 30px;
+        top: 60px;
+        right: -23.5px;
+        z-index: 100;
     }
 }
 /* end max-width 970px */
