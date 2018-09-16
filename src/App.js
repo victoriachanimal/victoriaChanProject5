@@ -3,8 +3,8 @@ import './styles/App.css';
 import firebase from './firebase';
 
 // Main Components:
-import Form from './components/Form';
-import Gallery from './components/Gallery';
+import Form from './components/Form/Form';
+import Gallery from './components/Gallery/Gallery';
 
 // Icon Components:
 import Lightning from './styles/assets/Lightning';

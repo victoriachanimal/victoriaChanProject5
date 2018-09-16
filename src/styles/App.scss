@@ -1,0 +1,517 @@
+/* COMPONENT STYLES (see index.css for Setup and General styles) */
+
+/* SETUP AND GENERAL STYLES */
+
+@import url('https://fonts.googleapis.com/css?family=Londrina+Solid|Open+Sans:400,700');
+
+
+/* Setup */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+/* General styles */
+html {
+  font-size: 62.5%;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+    max-width: 1280px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+button {
+    text-transform: uppercase;
+    color: white;
+    background: black;
+    letter-spacing: 1.3px;
+}
+
+img {
+    width: 100%;
+}
+
+.cover {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 6rem;
+}
+
+h3 {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 4.5rem;
+    text-align: center;
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+/* Footer Styles */
+
+footer {
+    border-top: 1.5px solid black;
+    background: black;
+    padding-bottom: 1px;
+    position: relative;
+}
+
+.copyright {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 2rem;
+    text-align: right;
+    padding: 0 25px;
+    color: white;
+}
+
+/* Header Styles */
+.headerLogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+.lightning .cls-2 {
+    fill: #f09433;
+}
+
+.eye .cls-2 {
+    fill: #bc1888;
+}
+
+.lightning {
+    width: 65px;
+    height: 65px;
+    margin-top: 70px;
+}
+
+.star {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 35px;
+    right: 40%;
+}
+
+.eye {
+    width: 75px;
+    height: 75px;
+    position: relative;
+    top: 50px;
+    right: 25px;
+}
+
+h1 {
+    text-align: center;
+    margin: 50px 0 10px 0; 
+    position: relative;
+}
+
+h2 {
+    text-align: center;
+}
+
+
+/* COMPONENT 1: Form Styles */
+form {
+    margin-top: 55px;
+    height: 95vh;
+}
+
+.imageInputs {
+    margin: 0 auto;
+}
+
+.imageUploadBtn {
+    margin: 15px 0 8px 0;
+}
+
+progress {
+    margin-bottom: 20px;
+    width: 20%;
+    border-radius: 0;
+}
+
+.postContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 75vh;
+    border: 1px solid black;
+}
+
+.image {
+    width: 60%;
+    background-color: black;
+    background: url(assets/camera.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    height: 100%;
+    border-right: 1px solid black;
+}
+
+.imageInputs,
+.captionInputs,
+.nameInput,
+.keywordInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+}
+
+#userImage {
+    text-align: center;
+    margin-left: 60px;
+}
+
+.captionInputs,
+.captionResult {
+    width: 40%;
+}
+
+.captionInputs {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    padding: 20px;
+}
+
+.captionInputs label {
+    font-family: 'Londrina Solid', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.nameInput,
+.keywordInput {
+    margin: 10px 0;
+}
+
+#userImage {
+    font-size: 1.2rem;
+}
+
+button,
+#finalSubmitBtn,
+input#userName,
+input#userKeyword {
+   padding: 10px 15px;
+   font-size: 1.5rem;
+   border: 1.5px solid black;
+   transition: all 0.3s ease;
+}
+
+.captionBtnContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.getCaptionBtn {
+    background: black;
+    margin-top: 25px;
+}
+
+.captionBtnContainer::after {
+    content: url(assets/mouth.svg);
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    right: -50px;
+    z-index: 100;
+}
+
+#finalSubmitBtn,
+.imageUploadBtn {
+    text-transform: uppercase;
+    color: white;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    border: 1.5px solid black;
+    letter-spacing: 1.3px;
+    margin-top: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Hover States */
+button:hover {
+    background: darkgray;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#finalSubmitBtn:hover,
+.imageUploadBtn:hover {
+    background: #e6683c;
+    outline: none;
+}
+
+button:focus,
+input:focus {
+    outline: none;
+}
+
+
+/* Caption Result Styles */
+.captionResult {
+    padding: 10px 20px 20px 20px;
+}
+
+.instaHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.headerImage {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    padding: 8px;
+    margin-right: 15px;
+}
+
+h4 {
+    width: calc(50% - (15px / 2));
+    text-transform: lowercase;
+    font-size: 1.5rem;
+}
+
+.caption {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 35px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 25px;
+}
+
+.bold {
+    font-weight: 700;
+    padding-right: 8px;
+}
+
+.author {
+    margin: 0;
+}
+
+.saveResult {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.saveResult::after {
+    content: url(assets/heart.svg);
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 25px;
+}
+
+.warning {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+/* COMPONENT 2: Gallery Styles */
+h3::after {
+    content: url(assets/ghost.svg);
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
+
+.finalResult {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.galleryPost {
+    width: calc(48% - (20px / 2));
+    border: 1px solid black;
+    margin: 10px auto;
+}
+
+.galleryPostHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.galleryPost .image {
+    width: 100%;
+    height: 30vh;
+    border-right: none;
+}
+
+.galleryPostCaption {
+    border-top: 1px solid lightgray;
+    padding: 15px;
+}
+
+
+/* RESPONSIVE STYLES */
+@media (max-width: 970px) {
+    /* Component 1: Form  */
+    .headerImage {
+        width: 40px;
+        height: 40px;
+    }
+
+    .saveResult::after {
+        width: 30px;
+        height: 30px;
+        bottom: 25px;
+    }
+
+    .caption {
+        margin-bottom: 10px;
+    }
+
+    .postContainer {
+        height: 70vh;
+    }
+
+    button,
+    #finalSubmitBtn,
+    input#userName,
+    input#userKeyword {
+        font-size: 1rem;
+    }
+
+    #finalSubmitBtn {
+        margin-top: 15px;
+    }
+}
+/* end max-width 970px */
+
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 780px) {
+    /* Component 1: Form */
+    form {
+        height: 130vh;
+    }
+
+    .image {
+        border-right: none;
+    }
+
+    .captionInputs {
+        border: 1px solid black;
+    }
+
+    .image,
+    .captionInputs,
+    .captionResult {
+        width: 100%;
+    }
+
+    .captionResult {
+        border: 1px solid black;
+    }
+
+    .saveResult::after {
+        display: none;
+    }
+
+    .captionBtnContainer::after {
+        width: 50px;
+        height: 50px;
+        top: 0px;
+        right: -65px;
+    }
+
+    .instaHeader {
+        display: none;
+    }
+
+    .caption {
+        border-top: none;
+        padding-bottom: 5px;
+    }
+}
+/* end max-width 780px */
+
+
+/* Landscape phones and down  */
+@media (max-width: 550px) {
+
+    /* Component 1: Form */
+    form {
+        height: 110vh;
+    }
+
+    .postContainer {
+        height: 45vh;
+    }
+
+    progress {
+        width: 45%;
+    }
+
+    /* Component 2: Gallery */
+    .galleryPost {
+        width: calc(100% - (20px / 3));
+    }
+}
+/* end max-width 500px */
+
+
+@media (max-width: 375px) {
+    .wrapper {
+        width: 100%;
+    }
+
+    /* Component 1: Form */
+    .postContainer {
+        height: 35vh;
+    }
+}
+/* end max-width 375px */
