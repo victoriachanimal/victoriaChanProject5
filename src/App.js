@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import './styles/App.css';
 import firebase from './firebase';
 
 // Main Components:
 import Form from './components/Form/Form';
 import Gallery from './components/Gallery/Gallery';
 
+// Global Stylesheets:
+import './styles/App.css';
+import './styles/mq.css';
+
 // Icon Components:
 import Lightning from './styles/assets/Lightning';
 import Eye from './styles/assets/Eye';
 import Star from './styles/assets/Star';
 
+
 //  Create a reference to the firebase database root and make it globally available:
 const dbRef = firebase.database().ref(); 
-const storage = firebase.storage();
 
 
 class App extends Component {
@@ -26,7 +29,7 @@ class App extends Component {
 
   addToDatabase = (userName, userCaption, captionAuthor, url) => {
     dbRef.push({
-      // pushing keys INTO the firebase, in the instaPost object
+      // push keys into firebase, and into the instaPost object
       name: userName,
       caption: userCaption,
       author: captionAuthor,
@@ -44,8 +47,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-      
+      <div className="App"> 
         <header>
           <div className="headerLogo">
             <Lightning />
@@ -60,7 +62,8 @@ class App extends Component {
             <Form addToDatabase={this.addToDatabase} instaPost={this.state.instaPost} />
 
             <h3>Gallery</h3>
-            <Gallery className="gallery" instaPost={this.state.instaPost} imageResult={this.state.url} />
+            <Gallery className="gallery" instaPost=
+            {this.state.instaPost} imageResult={this.state.url} />
           </div>
         </main>  
 

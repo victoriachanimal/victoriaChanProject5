@@ -1,0 +1,85 @@
+/* RESPONSIVE STYLES */
+@media (max-width: 970px) {
+  /* Component 1: Form  */
+  .headerImage {
+    width: 40px;
+    height: 40px; }
+  .saveResult::after {
+    width: 30px;
+    height: 30px;
+    bottom: 25px; }
+  .caption {
+    margin-bottom: 10px; }
+  .postContainer {
+    height: 70vh; }
+  button,
+  #finalSubmitBtn,
+  input#userName,
+  input#userKeyword {
+    font-size: 1rem; }
+  #finalSubmitBtn {
+    margin-top: 15px; } }
+
+/* end max-width 970px */
+/* Landscape phone to portrait tablet */
+@media (max-width: 780px) {
+  /* Component 1: Form */
+  form {
+    height: 150vh; }
+  .image {
+    border-right: none; }
+  .captionInputs {
+    border: 1px solid black; }
+  .image,
+  .captionInputs,
+  .captionResult {
+    width: 100%; }
+  .captionResult {
+    border: 1px solid black; }
+  .saveResult::after {
+    display: none; }
+  .instaHeader {
+    display: none; }
+  .caption {
+    border-top: none;
+    padding-bottom: 5px; } }
+
+/* end max-width 780px */
+/* Landscape phones and down  */
+@media (max-width: 550px) {
+  /* Component 1: Form */
+  form {
+    height: 130vh; }
+  .postContainer {
+    height: 45vh; }
+  progress {
+    width: 45%; }
+  /* Component 2: Gallery */
+  .galleryPost {
+    width: calc(100% - (20px / 3)); } }
+
+/* end max-width 500px */
+@media (max-width: 375px) {
+  .headerLogo::after {
+    display: none; }
+  .wrapper {
+    width: 100%; }
+  /* Component 1: Form */
+  form {
+    margin-top: 40px;
+    height: 135vh; }
+  .postContainer::before {
+    content: url(assets/arrow.svg);
+    display: inline-block;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    z-index: 100; }
+  .postContainer {
+    height: 35vh;
+    position: relative;
+    margin-top: 76px; } }
+
+/* end max-width 375px */

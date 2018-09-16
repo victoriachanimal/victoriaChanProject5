@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import firebase from '../../firebase';
 
+// Form Stylesheet:
+import './Form.css';
 
+// Create reference to cloud storage (for user image uploads)
 const storage = firebase.storage();
 
 class Form extends Component {
@@ -28,7 +31,6 @@ class Form extends Component {
 
     // Event handler for userImage input
      handleImageChange = (e) => {
-
         if(e.target.files[0]) {
             const url = e.target.files[0];
             this.setState(() => ({ url }));
@@ -37,7 +39,6 @@ class Form extends Component {
 
     // Event handler for userImage submit
     handleImageUpload = (e) => {
-
         e.preventDefault();
 
         const {url} = this.state;
@@ -46,18 +47,16 @@ class Form extends Component {
 
         uploadTask.on('state_changed', (snapshot) => {
 
-            // Progress function
+            // Progress bar function
             const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 
             this.setState({progress});
 
             // Observe state change events such as progress, pause, and resume
         }, (error) => {
-
             // Handle unsuccessful uploads
             console.log(error);
         }, () => {
-
             // Do something once upload is complete
             storage.ref('images').child(url.name).getDownloadURL().then(url => {
                this.setState({url});         
@@ -65,17 +64,17 @@ class Form extends Component {
         });
     }
 
-    // Event handler for userName and userKeyword input
+    // Event handler for userName and userKeyword inputs
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         }) 
     }
 
-    // Event handler for getting a caption from Api
+    // Event handler for getting caption from API
     getCaption = (e) => {
-
         e.preventDefault();
+
         // API REQUEST: Get list of quotes, based on user's keyword input
         axios.get('https://favqs.com/api/quotes', {
             params: {
@@ -85,7 +84,6 @@ class Form extends Component {
                 'Authorization': `Token token="1c9b7094e9b6d9ca7f8246a9bf600802"`,
             }
         }).then(({ data }) => {
-
             // Select a random quote off a list of quotes relating to user's keyword
             const randomQuote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
 
@@ -93,20 +91,20 @@ class Form extends Component {
             const userCaption = randomQuote.body;
             const captionAuthor = randomQuote.author;
 
+            // Send error message if user inputs empty string or invalid keyword
             if (userCaption === 'No quotes found') {
                 alert('No quotes found for this word. Please try another one!');
             } else {
                 this.setState({ userCaption, captionAuthor, showMe: false });
             }
-
         })
     }
 
-    // Event handler fo FINAL submit
+    // Event handler fo final submit
     handleSubmit = (e) => {
         e.preventDefault();
 
-        // api caption, username, and author are in form state. we are cool with all this data, so time to send it to firebase
+        // API caption, username, and author are in form state. Data is now ready to be sent to Firebase 
         this.props.addToDatabase(
             this.state.userName,
             this.state.userCaption,
@@ -146,7 +144,7 @@ class Form extends Component {
 
                     {/* Image container */}
                     <div className="image">        
-                        <img className="cover" src={this.state.url} />  
+                        <img className="cover" src={this.state.url} alt="Your uploaded image will go here."/>  
                     </div>
 
                     {/* Caption inputs container */}
@@ -173,7 +171,7 @@ class Form extends Component {
                     <div className="captionResult wrapper">
                         <div className="instaHeader">
                             <div className="headerImage">
-                                <img className="cover" src={this.state.url} /> 
+                                <img className="cover" src={this.state.url} alt="Your header pic or avatar"/> 
                             </div>
                             <h4>{this.state.userName}</h4>
                         </div>
@@ -183,7 +181,9 @@ class Form extends Component {
                                 <p className="author">-{this.state.captionAuthor}</p>
                             </div>
                         </div>
+                        
                         <div className="saveResult">
+                        {/* If user clicks below button, regenerate getCaption event handler on click */}
                             <button className="anotherCaptionBtn" onClick={this.getCaption}>Another one, pls</button>
                             <input type="submit" onClick={this.handleSubmit} id="finalSubmitBtn" className="save" value="Love it? Save it." />
                         </div>
