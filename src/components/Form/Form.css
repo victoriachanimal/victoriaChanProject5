@@ -17,7 +17,7 @@ progress {
 .postContainer {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   height: 75vh;
   border: 1px solid black; }
 
@@ -45,20 +45,18 @@ progress {
   text-align: center;
   margin-left: 60px; }
 
-.captionInputs,
-.captionResult {
+.postContainer .captionResult,
+.postContainer .captionInputs {
   width: 40%; }
 
 .captionInputs {
-  background: #DCDCDC;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   padding: 20px; }
 
 .steps {
   font-family: 'Londrina Solid', cursive;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   font-size: 2rem;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: black;
   padding-right: 4px; }
 
 label,
@@ -81,7 +79,7 @@ input#userName,
 input#userKeyword {
   padding: 10px 15px;
   font-size: 1.5rem;
-  border: 1.5px solid black;
+  border: 1.4px solid black;
   transition: all 0.3s ease; }
 
 .captionBtnContainer {
@@ -101,8 +99,8 @@ input#userKeyword {
   width: 35px;
   height: 35px;
   position: absolute;
-  top: 50px;
-  right: -45px;
+  top: 60px;
+  right: -40px;
   z-index: 100; }
 
 #finalSubmitBtn,
@@ -110,7 +108,7 @@ input#userKeyword {
   text-transform: uppercase;
   color: white;
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  border: 1.5px solid black;
+  border: 1.4px solid black;
   letter-spacing: 1.3px;
   margin-top: 25px;
   transition: all 0.3s ease; }

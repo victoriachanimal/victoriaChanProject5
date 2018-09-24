@@ -46,6 +46,10 @@
 /* Landscape phone to portrait tablet */
 @media (max-width: 780px) {
     /* Component 1: Form */
+    body .postContainer {
+        flex-wrap: wrap;
+    }
+
     form {
         height: 150vh;
     }
@@ -58,9 +62,9 @@
         border: 1px solid black;
     }
 
-    .image,
-    .captionInputs,
-    .captionResult {
+    .postContainer .image,
+    .postContainer .captionInputs,
+    .postContainer .captionResult {
         width: 100%;
     }
 
@@ -120,7 +124,7 @@
     /* Component 1: Form */
     form {
         margin-top: 40px;
-        height: 135vh;
+        height: 150vh;
     }
 
     .postContainer::before {
@@ -128,7 +132,7 @@
         display: inline-block;
         transform: rotate(90deg);
         position: absolute;
-        top: 65px;
+        top: 80px;
         left: 0;
         right: 0;
         z-index: 100;
